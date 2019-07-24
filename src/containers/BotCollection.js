@@ -14,7 +14,8 @@ class BotCollection extends React.Component {
     		  Collection of all bots
     		</div>
   	  </div>
-  	);
+	  );
+	  //test
   }
 
 };
