@@ -1,5 +1,5 @@
 import React from "react";
-import BotSpecs from "../components/BotSpecs";
+
 
 const BotCard = props => {
   const { bot } = props;
@@ -25,7 +25,11 @@ const BotCard = props => {
       <div
         className="ui card"
         key={bot.id}
-        onClick={() => props.handleClickArmy(props.bot) }
+        onClick={() => {
+          
+          props.showSpecs(props.bot)
+        } 
+      }
       >
         <div className="image">
           <img alt="oh no!" src={bot.avatar_url} />

@@ -1,11 +1,14 @@
 import React from "react";
 import BotCollection from './BotCollection'
 import YourBotArmy from './YourBotArmy'
+import BotSpecs from '../components/BotSpecs'
 
 class BotsPage extends React.Component {
   state = {
     bots: [],
-    army: []
+    army: [],
+    showDetails: false,
+    detailBot: []
   }
   componentDidMount(){
     fetch('https://bot-battler-api.herokuapp.com/api/v1/bots')
@@ -16,6 +19,13 @@ class BotsPage extends React.Component {
       })
     })
   }
+  showSpecs = (bot)=>{
+		this.setState({
+      showDetails: !this.state.showDetails,
+      detailBot: bot
+    })
+    
+	}
 
   handleClickArmy = (robot)=>{
     if (this.state.army.includes(robot)){
@@ -32,8 +42,7 @@ class BotsPage extends React.Component {
   render() {
     return (
       <div>
-        <YourBotArmy army={this.state.army} handleClickArmy={this.handleClickArmy}/>
-        <BotCollection bots={this.state.bots} handleClickArmy={this.handleClickArmy}/>
+        {!this.state.showDetails?<div><YourBotArmy army={this.state.army} handleClickArmy={this.handleClickArmy}/><BotCollection bots={this.state.bots} showSpecs={this.showSpecs} /></div>:<BotSpecs showSpecs={this.showSpecs} bot={this.state.detailBot}handleClickArmy={this.handleClickArmy}/>}
       </div>
     );
   }

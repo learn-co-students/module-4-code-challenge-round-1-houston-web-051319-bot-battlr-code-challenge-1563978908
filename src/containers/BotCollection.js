@@ -1,12 +1,9 @@
 import React from "react";
 import BotCard from "../components/BotCard";
-import BotSpecs from "../components/BotSpecs"
+
 
 class BotCollection extends React.Component {
-	state = {
-		showDetails: false
-	}
-  
+	
 	handleClick = (bot)=>{
 		this.setState({
 			showDetails: !this.state.showDetails
@@ -19,7 +16,7 @@ class BotCollection extends React.Component {
   	  	<div className="ui four column grid">
     		<div className="row" >
     		  {this.props.bots.map(bot=>{
-				  return <BotCard bot={bot} handleClickArmy={this.props.handleClickArmy}/>
+				  return <BotCard bot={bot}  showSpecs={this.props.showSpecs}/>
 			  })}
     		  Collection of all bots
     		</div>
