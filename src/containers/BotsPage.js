@@ -1,6 +1,7 @@
 import React from "react";
 import BotCollection from "./BotCollection";
 import YourBotArmy from "./YourBotArmy";
+import BotSpecs from "../components/BotSpecs";
 
 class BotsPage extends React.Component {
   //start here with your code for step one
@@ -9,18 +10,28 @@ class BotsPage extends React.Component {
   // }
   
   state={
-    bots: []
+    bots: [],
+    bot: {},
+    botDetails: false
   }
 
-  addUserBots = (newBot)=>{
+  showDetails = (newBot) => {
+    this.setState({
+      bot: newBot,
+      botDetails: !this.state.botDetails
+    })
+  }
+  addUserBots = (newBot)=>{ 
     this.setState({
       bots: this.state.bots.map(bot => {
         if(bot.id === newBot.id){
-          return {...bot, userBot: !bot.userBot}
+          return {...bot, userBot: true}
         } else {
           return bot
         }
-      })
+      }),
+      bot: {},
+      botDetails: !this.state.botDetails
     })
   }
   removeUserBots = (newBot)=>{
@@ -49,7 +60,7 @@ class BotsPage extends React.Component {
       <div>
         {/* put your components here */}
         <YourBotArmy bots={this.state.bots} addUserBots={this.removeUserBots}/>
-        <BotCollection bots={this.state.bots} addUserBots={this.addUserBots}/>
+        {this.state.botDetails ? <BotSpecs bot={this.state.bot} addUserBots={this.addUserBots} showDetails={this.showDetails}/> : <BotCollection bots={this.state.bots} showDetails={this.showDetails}/>}
       </div>
     );
   }

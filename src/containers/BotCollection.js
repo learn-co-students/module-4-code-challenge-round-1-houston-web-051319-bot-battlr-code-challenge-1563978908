@@ -21,7 +21,7 @@ class BotCollection extends React.Component {
   	  <div className="ui four column grid">
     		<div className="row">
     		  {this.props.bots.map(bot=>(
-				  <BotCard bot={bot} addUserBots={this.props.addUserBots}/>
+				  <BotCard bot={bot} showDetails={this.props.showDetails}/>
 			  ))}
     		</div>
   	  </div>
