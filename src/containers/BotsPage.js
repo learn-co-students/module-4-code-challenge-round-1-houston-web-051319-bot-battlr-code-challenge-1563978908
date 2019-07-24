@@ -23,6 +23,17 @@ class BotsPage extends React.Component {
       })
     })
   }
+  removeUserBots = (newBot)=>{
+    this.setState({
+      bots: this.state.bots.map(bot => {
+        if(bot.id === newBot.id){
+          return {...bot, userBot: !bot.userBot}
+        } else {
+          return bot
+        }
+      })
+    })
+  }
 
   componentDidMount(){
 	  fetch('https://bot-battler-api.herokuapp.com/api/v1/bots')
@@ -37,7 +48,7 @@ class BotsPage extends React.Component {
     return (
       <div>
         {/* put your components here */}
-        <YourBotArmy bots={this.state.bots}/>
+        <YourBotArmy bots={this.state.bots} addUserBots={this.removeUserBots}/>
         <BotCollection bots={this.state.bots} addUserBots={this.addUserBots}/>
       </div>
     );
