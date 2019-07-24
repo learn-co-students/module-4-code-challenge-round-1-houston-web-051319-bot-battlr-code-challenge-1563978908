@@ -25,7 +25,7 @@ const BotCard = props => {
         className="ui card"
         key={bot.id}
         // onClick={() => console.log(bot)}
-        //onClick send which bot was clicked to YBA
+        // onClick pass the information back up to YourBotArmy 
         onClick={() => console.log(bot)}
       >
         <div className="image">
