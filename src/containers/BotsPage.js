@@ -1,13 +1,16 @@
 import React from "react";
 import BotCollection from './BotCollection'
 import YourBotArmy from './YourBotArmy'
+import BotSpecs from '../components/BotSpecs'
 
 class BotsPage extends React.Component {
   //start here with your code for step one
 
   state = {
     allBots: [],
-    armyBots: []
+    armyBots: [],
+    selectedBot: "",
+    showBotsPage: true
   }
 
   componentDidMount = () => {
@@ -18,11 +21,8 @@ class BotsPage extends React.Component {
     })
   }
 
-  handleAddToArmy = (bot) => {
-    if (this.state.armyBots.filter(currBot => currBot.id === bot.id).length < 1) {
-      let updatedArmyBotsArr = this.state.armyBots.concat(bot)
-      this.setState({armyBots: updatedArmyBotsArr})
-    }
+  handleShowDetails = (bot) => {
+    this.setState({showBotsPage: !this.state.showBotsPage, selectedBot: bot})
   }
 
   handleRemoveFromArmy = (bot) => {
@@ -32,11 +32,22 @@ class BotsPage extends React.Component {
     this.setState({armyBots: updatedArmyBotsArr})
   }
 
+  goBack = () => {
+    this.setState({showBotsPage: !this.state.showBotsPage, selectedBot: ""})
+  }
+
+  enlist = (bot) => {
+    if (this.state.armyBots.filter(currBot => currBot.id === bot.id).length < 1) {
+      let updatedArmyBotsArr = this.state.armyBots.concat(bot)
+      this.setState({armyBots: updatedArmyBotsArr, showBotsPage: !this.state.showBotsPage, selectedBot: ""})
+    }
+  }
+
   render() {
     return (
       <div>
         {<YourBotArmy armyBots={this.state.armyBots} handleClick={this.handleRemoveFromArmy}/>}
-        {<BotCollection allBots={this.state.allBots} handleClick={this.handleAddToArmy}/>}
+        {this.state.showBotsPage?<BotCollection allBots={this.state.allBots} handleClick={this.handleShowDetails}/> : <BotSpecs bot={this.state.selectedBot} goBack={this.goBack} enlist={this.enlist}/>}
       </div>
     );
   }
