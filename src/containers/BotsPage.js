@@ -20,14 +20,14 @@ class BotsPage extends React.Component {
   }
 
   handleStatusChange = (id) =>{
-
+console.log(id)
   this.setState({
     botArray:this.state.botArray.map(bot =>{
       if(bot.id == id){
         return{...bot,atCollection:!bot.atCollection}
       }
       else{
-        bot
+       return bot
       }
     })
   })

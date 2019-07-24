@@ -23,7 +23,7 @@ class BotCollection extends React.Component {
     		<div className="row">
 			  {this.props.botCollection.map(bot=>{
 			  {this.state.showDetails ? <Show bot={bot}/>: null}
-               return <BotCard  bot={bot}   onShow={this.handleShow} onClick={()=>this.props.onClick()}/>
+               return <BotCard  bot={bot}   onShow={this.handleShow} onClick={()=>this.props.onClick(bot.id)}/>
 			  })}
     		  Collection of all bots
 			  {/* <Show  details={this.state.show} /> */}
