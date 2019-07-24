@@ -8,7 +8,15 @@ class BotsPage extends React.Component {
 
   state = {
     botData: [],
-    userBots: []
+    userBots: [],
+    showSpecs: false 
+  }
+
+
+  displaySpecs = () => {
+    this.setState({
+      showSpecs: !false
+    })
   }
 
   componentDidMount() {
@@ -21,17 +29,23 @@ class BotsPage extends React.Component {
     })
   }
 
+
   handleClick = (bot) => {
+    if(this.state.userBots.filter(userBot => {
+    return  !userBot.id === bot.id
+    }))
     this.setState({
       userBots: [ ...this.state.userBots, bot ]
     })
   }
 
+
+
   render() { 
     return (
       <div>
         <YourBotArmy handleClick={this.handleClick} userBots={this.state.userBots}/>
-        <BotCollection allBots={this.state.botData} handleClick={this.handleClick}/>
+        <BotCollection allBots={this.state.botData} handleClick={this.handleClick} displaySpecs={this.displaySpecs}/>
       </div>
     );
   }

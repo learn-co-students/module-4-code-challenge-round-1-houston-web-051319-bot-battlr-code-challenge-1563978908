@@ -13,7 +13,7 @@ class YourBotArmy extends React.Component {
             {console.log(this.props.userBots)}
             {this.props.userBots.map(bot => {
               return (
-                <BotCard bot={bot}/>
+                <BotCard bot={bot} handleClick={this.props.handleClick}/>
               )
             })}
           </div>
