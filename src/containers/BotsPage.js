@@ -20,7 +20,7 @@ class BotsPage extends React.Component {
   transfer = id => {
     console.log(id);
     let result = this.state.Bots.find(bot => bot.id === id);
-    this.setState({ ...this.state, NewBots: [result] });
+    this.setState({ ...this.state, NewBots: [...this.state.NewBots, result] });
   };
 
   render() {
